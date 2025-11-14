@@ -5,12 +5,19 @@
   box-sizing: border-box;
   border: none;
   outline: none;
+  color: #000;
   text-decoration: none;
+  font-family: "TikTok Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100;
 }
 
-div {
+/* Create layout */
+.container, .content, .filter, .footer {
   border: 1px solid #000;
-  /* height: 50px; */
 }
 
 div.header {
@@ -28,4 +35,64 @@ div.container div.search {
 }
 div.footer {
   height: 15dvh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 15px;
+  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, .1)
+}
+.header > div {
+  display: inline-flex;
+  height: 80%;
+  margin: 0 20px
+}
+
+.header > div > div {
+  height: 100%;
+  padding: 0 15px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+}
+.header > div > div > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.header .right {
+  margin-left: auto;
+}
+.left > div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.left > div::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  height: 3px;
+  width: 0;
+  transition: width 0.25s linear ;
+  background-color: #fca103;
+}
+.left > div:hover::after {
+  align-self: center;
+  width: calc(100% - 30px);
+}
+a.home img{
+  border-radius: 15px;
+}
+
+.right > div {
+  border-radius: 15px;
+}
+.right > div:hover {
+  background-color: rgba(237, 235, 232, 0.3);
 }
