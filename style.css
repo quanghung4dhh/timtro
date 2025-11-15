@@ -16,7 +16,7 @@
 }
 
 /* Create layout */
-.container, .content, .filter, .footer {
+.container, .content, .filter-opt, .footer {
   border: 1px solid #000;
 }
 
@@ -27,7 +27,7 @@ div.container {
   height: 100dvh;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 2fr 12fr;
   gap: 5px;
 }
 div.container div.search {
@@ -95,4 +95,98 @@ a.home img{
 }
 .right > div:hover {
   background-color: rgba(237, 235, 232, 0.3);
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+.search-bar form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+.search-bar input#search{
+  height: 70%;
+  display: inline-block;
+  border: 1px solid #000;
+  width: clamp(150px, 80%, 700px);
+  margin-right: 15px;
+  border-radius: 10px;
+  cursor: auto;
+  padding: 0 40px;
+  font-size: 1.1em;
+  background-color: #f1f1f1;
+  background-image: url('./assets/search.png');
+  background-position-y: center;
+  background-position-x: 10px;
+  background-repeat: no-repeat;
+}
+.search-bar input[type="submit"] {
+  height: 70%;
+  padding: 0 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #ff8e3c;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1.13em;
+}
+.search-bar input[type="submit"]:hover {
+  background-color: #f5781d;
+  box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, .1);
+}
+.filter {
+  display: flex;
+  width: 100%;
+  height: 50%;
+  align-items: center;
+  padding-left: 15px;
+}
+.filter-items {
+  padding-left: 20px;
+  padding-right: 30px;
+  border: 1px solid #d1ccc9;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  color: #a7a9be;
+  font-weight: 500;
+}
+.filter-items:hover {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.filter .filter-items:not(:first-child)::after {
+  content: '🢓';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transition: transform 0.3s;
+  transform-origin: center calc(50% - 9px);
+  transform: translateY(-28%) rotateZ(0deg);
+  font-size: 30px;
+}
+.filter .filter-items:not(:first-child):hover::after {
+  transform: translateY(-28%) rotateZ(-180deg);
+}
+
+.filter .filter-items:first-child {
+  background-image: url('./assets/filter.png');
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  padding-left: 35px;
+  padding-right: 20px;
 }
