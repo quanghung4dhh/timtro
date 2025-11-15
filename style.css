@@ -10,13 +10,13 @@
   font-family: "TikTok Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "wdth" 100;
+  font-variation-settings: "slnt" 0, "wdth" 100;
 }
 
 /* Create layout */
-.container, .content, .filter-opt, .footer {
+.container,
+.filter-opt,
+.footer {
   border: 1px solid #000;
 }
 
@@ -43,12 +43,12 @@ div.footer {
   align-items: center;
   margin-bottom: 10px;
   padding: 0 15px;
-  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, .1)
+  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.1);
 }
 .header > div {
   display: inline-flex;
   height: 80%;
-  margin: 0 20px
+  margin: 0 20px;
 }
 
 .header > div > div {
@@ -79,14 +79,14 @@ div.footer {
   bottom: 10px;
   height: 3px;
   width: 0;
-  transition: width 0.25s linear ;
+  transition: width 0.25s linear;
   background-color: #fca103;
 }
 .left > div:hover::after {
   align-self: center;
   width: calc(100% - 30px);
 }
-a.home img{
+a.home img {
   border-radius: 15px;
 }
 
@@ -111,7 +111,7 @@ a.home img{
   align-items: center;
   padding: 0 15px;
 }
-.search-bar input#search{
+.search-bar input#search {
   height: 70%;
   display: inline-block;
   border: 1px solid #000;
@@ -122,7 +122,7 @@ a.home img{
   padding: 0 40px;
   font-size: 1.1em;
   background-color: #f1f1f1;
-  background-image: url('./assets/search.png');
+  background-image: url("./assets/search.png");
   background-position-y: center;
   background-position-x: 10px;
   background-repeat: no-repeat;
@@ -139,7 +139,7 @@ a.home img{
 }
 .search-bar input[type="submit"]:hover {
   background-color: #f5781d;
-  box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, .1);
+  box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, 0.1);
 }
 .filter {
   display: flex;
@@ -169,7 +169,7 @@ a.home img{
 }
 
 .filter .filter-items:not(:first-child)::after {
-  content: '🢓';
+  content: "🢓";
   display: inline-block;
   position: absolute;
   top: 50%;
@@ -184,9 +184,169 @@ a.home img{
 }
 
 .filter .filter-items:first-child {
-  background-image: url('./assets/filter.png');
+  background-image: url("./assets/filter.png");
   background-repeat: no-repeat;
   background-position: 8px center;
   padding-left: 35px;
   padding-right: 20px;
+}
+
+/* Content */
+.nav {
+  padding: 5px 10px;
+}
+.heading {
+  font-weight: 600;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  grid-column: 1 / span 2;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.sort .dropdown {
+  width: 50%;
+  float: right;
+  position: relative;
+}
+.sort .sort-opt {
+  border: 1px solid #d1ccc9;
+  padding: 6px 20px;
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.sort .sort-opt:hover {
+  border: 1px solid #000;
+}
+.sort-opt::after {
+  content: "🢓";
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transition: transform 0.3s;
+  transform-origin: center calc(50% - 9px);
+  transform: translateY(-28%) rotateZ(0deg);
+  font-size: 30px;
+}
+.dropdown-items {
+  padding: 5px 20px;
+  cursor: pointer;
+}
+.dropdown-items:hover {
+  background-color: #d1ccc9;
+}
+.dropdown-sort {
+  border-radius: 8px;
+  box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  display: none;
+  position: absolute;
+  top: calc(100% - 10px);
+  background-color: #fff;
+  width: 100%;
+  z-index: 999;
+}
+.dropdown:hover .dropdown-sort {
+  display: block;
+}
+.content {
+  box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.list .card {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: clamp(230px, 30dvh, 500px);
+  position: relative;
+  margin-bottom: 20px;
+}
+.card .pic img {
+  width: 100%;
+  height: 100%;
+}
+.card .intro {
+  font-weight: 600;
+}
+.card .context {
+  padding: 20px;
+}
+.card .price,
+.area {
+  color: #e53170;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+.card .price {
+  margin-left: 0;
+}
+.card .bathroom,
+.bedroom {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.card .bathroom img,
+.bedroom img {
+  vertical-align: middle;
+}
+.card .bathroom img {
+  transform: translateY(-20%);
+}
+.price-area {
+  padding: 10px 0;
+}
+.location img {
+  vertical-align: middle;
+  transform: translateY(-10%);
+  margin-right: 5px;
+}
+.location {
+  margin-bottom: 10px;
+}
+.card .description, .intro {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-height: 22px;
+  height: 44px; 
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+.card .time {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.8em;
+}
+.card {
+  box-shadow: -3px 3px 10px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding-left: 20px;
+}
+.card .like {
+  background-image: url('./assets/heart2.png');
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  bottom: 15px;
+  transition: 0.2s linear;
+  right: 30px;
+  border-radius: 5px;
+}
+
+.like:hover {
+    background-image: url('./assets/heart1.png');
+
 }
