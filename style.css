@@ -14,10 +14,6 @@
 }
 
 /* Create layout */
-.footer {
-  border: 1px solid #000;
-}
-
 div.header {
   height: clamp(50px, 8dvh, 100px);
 }
@@ -33,7 +29,7 @@ div.container div.search {
   grid-column: 1 / span 2;
 }
 div.footer {
-  height: 15dvh;
+  height: auto;
 }
 
 /* Header */
@@ -312,12 +308,13 @@ a.home img {
 .location {
   margin-bottom: 10px;
 }
-.card .description, .intro {
+.card .description,
+.intro {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-height: 22px;
-  height: 44px; 
+  height: 44px;
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
@@ -332,7 +329,7 @@ a.home img {
   padding-left: 20px;
 }
 .card .like {
-  background-image: url('./assets/heart2.png');
+  background-image: url("./assets/heart2.png");
   background-size: cover;
   width: 25px;
   height: 25px;
@@ -346,8 +343,7 @@ a.home img {
 }
 
 .like:hover {
-    background-image: url('./assets/heart1.png');
-
+  background-image: url("./assets/heart1.png");
 }
 
 /* Filter */
@@ -361,11 +357,86 @@ a.home img {
   font-size: 1.1em;
   margin-bottom: 10px;
 }
-.filter-opt > div > div > div{
+.filter-opt > div > div > div {
   margin-bottom: 15px;
   cursor: pointer;
   font-size: 0.9em;
 }
 .filter-opt > div > div > div:hover {
   color: #5f6c7b;
+}
+
+/* Footer */
+.footer {
+  display: grid;
+  grid-template-rows: 100px 230px 300px 80px;
+  gap: 10px;
+  background-color: #f1f1f1;
+  margin-top: 30px;
+}
+.footer > div {
+  display: flex;
+}
+
+.contact-info {
+  justify-content: space-around;
+}
+
+.contact-info > div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.contact-info > div div:first-child {
+  margin-right: 10px;
+}
+
+.rule {
+  justify-content: space-around;
+}
+div.name > div {
+  display: flex;
+  margin-bottom: 15px;
+}
+div.name img {
+  margin-right: 10px;
+  align-self: center;
+}
+.company-location img {
+  transform: translateY(-10%);
+}
+.company {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+.rule h2 {
+  font-size: 1.1em;
+}
+.guide div,
+.rules div {
+  margin-top: 10px;
+  cursor: pointer;
+}
+.guide div:hover,
+.rules div:hover {
+  color: #5f6c7b;
+}
+.branch {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px auto auto;
+  padding: 0 15px;
+}
+.branch > h2 {
+  grid-column: 1 / span 3;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+.social-media > div {
+  margin-right: 20px;
+}
+.social-media > div:hover {
+  opacity: 0.7;
 }
