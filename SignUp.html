@@ -304,7 +304,7 @@
       // Xử lý sự kiện Submit form
       document
         .getElementById("signupForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault(); // Ngăn load lại trang
 
           const username = document.getElementById("username").value.trim();
@@ -336,15 +336,34 @@
             return;
           }
 
-          // Nếu thành công
-          showSuccess(`Đăng ký thành công! Xin chào, ${username}.`);
+          //Gọi API đăng ký
+          try {
+            const response = await fetch("http://localhost:3000/api/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username,
+                password,
+              }),
+            });
 
-          setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1500);
+            const data = await response.json();
 
-          // Reset form (tuỳ chọn)
-          // this.reset();
+            if (!response.ok) {
+              showError(`Đăng ký thất bại: ${data.message}`);
+              return;
+            } else {
+              showSuccess(`Đăng ký thành công! Xin chào, ${username}.`);
+              setTimeout(() => {
+                window.location.href = "index.html";
+              }, 1500);
+            }
+          } catch (err) {
+            showError(`Lỗi kết nối: ${err}`);
+            return;
+          }
         });
 
       function showError(message) {
