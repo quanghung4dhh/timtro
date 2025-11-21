@@ -306,7 +306,7 @@
       // Xử lý sự kiện Submit form
       document
         .getElementById("loginForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault();
 
           const username = document.getElementById("username").value.trim();
@@ -332,8 +332,31 @@
             return;
           }
 
+          //Gọi API đăng nhập
+          try {
+            const response = await fetch("http://localhost:3000/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username,
+                password,
+              }),
+            });
+            const data = await response.json();
+            if (!response.ok) {
+              showError(data.message);
+              return;
+            }
+          } catch (err) {
+            showError("Có lỗi xảy ra, vui lòng thử lại sau");
+            return;
+          }
+
           // Nếu thành công
           showSuccess("Đăng nhập thành công! Đang chuyển hướng...");
+          localStorage.setItem("username", username);
 
           // Chuyển hướng sau 1.5s (demo)
           setTimeout(() => {
