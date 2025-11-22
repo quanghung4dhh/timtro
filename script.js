@@ -13,3 +13,12 @@ if (username) {
   user.innerHTML = `<a href="Login.html">Đăng nhập</a>`;
   logOut.innerHTML = `<a href="SignUp.html">Đăng ký</a>`;
 }
+
+//Change sort option when clicking
+const chosen = document.querySelector(".dropdown .sort-opt");
+const options = document.querySelectorAll(".dropdown-sort .dropdown-items");
+for (const item of options) {
+  item.addEventListener("click", () => {
+    chosen.innerText = item.innerText;
+  })
+}

@@ -347,7 +347,7 @@
 
           <!-- Địa điểm -->
           <div class="input-group full-width">
-            <label for="address">Địa điểm chi tiết</label>
+            <label for="address">Địa chỉ chi tiết</label>
             <div class="input-wrapper">
               <i class="fas fa-map-marker-alt icon"></i>
               <input
@@ -462,13 +462,17 @@
       // Xử lý Submit Form
       document
         .getElementById("postForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault();
 
           const title = document.getElementById("title").value;
           const priceInput = document.getElementById("price");
           const areaInput = document.getElementById("area");
           const isNegotiable = document.getElementById("isNegotiable").checked;
+          const location = document.getElementById("address").value;
+          const bedrooms = parseInt(document.getElementById("bedroom").value);
+          const bathrooms = parseInt(document.getElementById("bathroom").value);
+          const description = document.getElementById("description").value;
 
           // Chuyển đổi sang số thực (float) để xử lý số thập phân
           const price = parseFloat(priceInput.value);
@@ -497,18 +501,42 @@
             return;
           }
 
-          // Giả lập gửi dữ liệu thành công
-          console.log("Dữ liệu gửi đi:", {
-            title,
-            price: isNegotiable ? "Thương lượng" : price,
-            area: area,
-            images: selectedFiles,
-          });
+          // Gọi API gửi dữ liệu đi
+          try {
+            const formData = new FormData();
 
-          showMessage(
-            "Đăng tin thành công! Bài viết đang chờ duyệt.",
-            "success"
-          );
+            //Lấy file ảnh
+            for (const image of selectedFiles) {
+              formData.append("images", image);
+            }
+
+            //Lấy file text
+            formData.append("title", title);
+            formData.append("price", price);
+            formData.append("isNegotiable", isNegotiable);
+            formData.append("area", area);
+            formData.append("location", location);
+            formData.append("bedrooms", bedrooms);
+            formData.append("bathrooms", bathrooms);
+            formData.append("description", description);
+
+            const response = await fetch(
+              "http://localhost:3000/api/create-post",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+            const data = await response.json();
+
+            if (!response.ok) {
+              showMessage(data.message, "error");
+              return;
+            }
+          } catch (err) {
+            showMessage("Có lỗi xảy ra, vui lòng thử lại sau", "error");
+            return;
+          }
 
           // Reset form sau khi đăng thành công
           setTimeout(() => {
