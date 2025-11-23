@@ -87,7 +87,7 @@ function createCard(info) {
   const card = document.createElement("div");
   card.className = "card";
 
-  if (info.isNegotiable == "false") {
+  if (!info.isNegotiable) {
     card.innerHTML = `<div class="pic">
               <img
                 src="${info.images[0]}"
@@ -231,7 +231,7 @@ function filterArea(posts, from, to) {
   }
   document.querySelector(
     "h2.heading"
-  ).innerText = (from < 500) ? `Thuê trọ từ ${from} đến ${to} triệu đồng`: `Thuê trọ trên 500 m²`;
+  ).innerText = (from < 500) ? `Thuê trọ từ ${from} đến ${to} m²`: `Thuê trọ trên 500 m²`;
   document.querySelector(
     "div.result"
   ).innerText = `Hiện có ${satisfied.length} chỗ thuê trọ`;
