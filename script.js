@@ -45,25 +45,61 @@ window.onload = async () => {
   ).innerText = `Hiện có ${posts.length} chỗ thuê trọ`;
 
   //Add event to filter button
-  document.querySelector("div.p").addEventListener("click", () => filterPrice(posts, "neg", 0));
-  document.querySelector("div.p1").addEventListener("click", () => filterPrice(posts, 0, 1));
-  document.querySelector("div.p1-3").addEventListener("click", () => filterPrice(posts, 1, 3));
-  document.querySelector("div.p3-5").addEventListener("click", () => filterPrice(posts, 3, 5));
-  document.querySelector("div.p5-10").addEventListener("click", () => filterPrice(posts, 5, 10));
-  document.querySelector("div.p10-40").addEventListener("click", () => filterPrice(posts, 10, 40));
-  document.querySelector("div.p40-70").addEventListener("click", () => filterPrice(posts, 40, 70));
-  document.querySelector("div.p70-100").addEventListener("click", () => filterPrice(posts, 70, 100));
-  document.querySelector("div.p100").addEventListener("click", () => filterPrice(posts, 100, 1000));
+  document
+    .querySelector("div.p")
+    .addEventListener("click", () => filterPrice(posts, "neg", 0));
+  document
+    .querySelector("div.p1")
+    .addEventListener("click", () => filterPrice(posts, 0, 1));
+  document
+    .querySelector("div.p1-3")
+    .addEventListener("click", () => filterPrice(posts, 1, 3));
+  document
+    .querySelector("div.p3-5")
+    .addEventListener("click", () => filterPrice(posts, 3, 5));
+  document
+    .querySelector("div.p5-10")
+    .addEventListener("click", () => filterPrice(posts, 5, 10));
+  document
+    .querySelector("div.p10-40")
+    .addEventListener("click", () => filterPrice(posts, 10, 40));
+  document
+    .querySelector("div.p40-70")
+    .addEventListener("click", () => filterPrice(posts, 40, 70));
+  document
+    .querySelector("div.p70-100")
+    .addEventListener("click", () => filterPrice(posts, 70, 100));
+  document
+    .querySelector("div.p100")
+    .addEventListener("click", () => filterPrice(posts, 100, 1000));
 
-  document.querySelector("div.a30").addEventListener("click", () => filterArea(posts, 0, 30));
-  document.querySelector("div.a30-50").addEventListener("click", () => filterArea(posts, 30, 50));
-  document.querySelector("div.a50-80").addEventListener("click", () => filterArea(posts, 50, 80));
-  document.querySelector("div.a80-100").addEventListener("click", () => filterArea(posts, 80, 100));
-  document.querySelector("div.a100-150").addEventListener("click", () => filterArea(posts, 100, 150));
-  document.querySelector("div.a150-200").addEventListener("click", () => filterArea(posts, 150, 200));
-  document.querySelector("div.a200-300").addEventListener("click", () => filterArea(posts, 200, 300));
-  document.querySelector("div.a300-500").addEventListener("click", () => filterArea(posts, 300, 500));
-  document.querySelector("div.a500").addEventListener("click", () => filterArea(posts, 500, 500000));
+  document
+    .querySelector("div.a30")
+    .addEventListener("click", () => filterArea(posts, 0, 30));
+  document
+    .querySelector("div.a30-50")
+    .addEventListener("click", () => filterArea(posts, 30, 50));
+  document
+    .querySelector("div.a50-80")
+    .addEventListener("click", () => filterArea(posts, 50, 80));
+  document
+    .querySelector("div.a80-100")
+    .addEventListener("click", () => filterArea(posts, 80, 100));
+  document
+    .querySelector("div.a100-150")
+    .addEventListener("click", () => filterArea(posts, 100, 150));
+  document
+    .querySelector("div.a150-200")
+    .addEventListener("click", () => filterArea(posts, 150, 200));
+  document
+    .querySelector("div.a200-300")
+    .addEventListener("click", () => filterArea(posts, 200, 300));
+  document
+    .querySelector("div.a300-500")
+    .addEventListener("click", () => filterArea(posts, 300, 500));
+  document
+    .querySelector("div.a500")
+    .addEventListener("click", () => filterArea(posts, 500, 500000));
 };
 async function getPosts() {
   try {
@@ -203,9 +239,14 @@ function filterPrice(posts, from, to) {
     const card = createCard(post);
     container.appendChild(card);
   }
-  document.querySelector(
-    "h2.heading"
-  ).innerText = (from < 100) ? `Thuê trọ từ ${from} đến ${to} triệu đồng`: `Thuê trọ trên 100 triệu đồng`;
+  if (from == "neg") {
+    document.querySelector("h2.heading").innerText = `Thuê trọ giá thỏa thuận`;
+  } else {
+    document.querySelector("h2.heading").innerText =
+      from < 100
+        ? `Thuê trọ từ ${from} đến ${to} triệu đồng`
+        : `Thuê trọ trên 100 triệu đồng`;
+  }
   document.querySelector(
     "div.result"
   ).innerText = `Hiện có ${satisfied.length} chỗ thuê trọ`;
@@ -229,9 +270,8 @@ function filterArea(posts, from, to) {
     const card = createCard(post);
     container.appendChild(card);
   }
-  document.querySelector(
-    "h2.heading"
-  ).innerText = (from < 500) ? `Thuê trọ từ ${from} đến ${to} m²`: `Thuê trọ trên 500 m²`;
+  document.querySelector("h2.heading").innerText =
+    from < 500 ? `Thuê trọ từ ${from} đến ${to} m²` : `Thuê trọ trên 500 m²`;
   document.querySelector(
     "div.result"
   ).innerText = `Hiện có ${satisfied.length} chỗ thuê trọ`;
