@@ -219,6 +219,11 @@
         box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
       }
 
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .form-grid {
@@ -464,6 +469,7 @@
         .getElementById("postForm")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
+          document.querySelector(".submit-btn").disabled = true;
 
           const title = document.getElementById("title").value;
           const priceInput = document.getElementById("price");
@@ -486,18 +492,21 @@
           // Validate cơ bản
           if (selectedFiles.length === 0) {
             showMessage("Vui lòng chọn ít nhất 1 hình ảnh minh họa!", "error");
+            document.querySelector(".submit-btn").disabled = false;
             return;
           }
 
           // Validate Diện tích
           if (isNaN(area) || area <= 0) {
             showMessage("Vui lòng nhập diện tích hợp lệ!", "error");
+            document.querySelector(".submit-btn").disabled = false;
             return;
           }
 
           // Kiểm tra giá: Nếu KHÔNG phải thương lượng thì mới bắt buộc nhập giá
           if (!isNegotiable && (isNaN(price) || price < 0)) {
             showMessage("Vui lòng nhập giá tiền hợp lệ!", "error");
+            document.querySelector(".submit-btn").disabled = false;
             return;
           }
 
@@ -531,10 +540,12 @@
 
             if (!response.ok) {
               showMessage(data.message, "error");
+              document.querySelector(".submit-btn").disabled = false;
               return;
             }
           } catch (err) {
             showMessage("Có lỗi xảy ra, vui lòng thử lại sau", "error");
+            document.querySelector(".submit-btn").disabled = false;
             return;
           }
 
@@ -546,6 +557,7 @@
             this.reset();
             // Reset trạng thái ô giá về mặc định
             document.getElementById("price").disabled = false;
+            document.querySelector(".submit-btn").disabled = false;
             document.getElementById("price").style.backgroundColor = "#fff";
 
             document.getElementById("imagePreview").innerHTML = "";
