@@ -42,24 +42,29 @@ for (const item of options) {
 //Get all posts
 window.onload = async () => {
   const posts = await getPosts();
-  satisfied = posts;
   const container = document.querySelector(".list");
 
   //Load all posts
-  for (const post of posts) {
-    const createdAtDate = new Date(post.createdAt);
-    const now = new Date();
+  function loadAllPosts() {
+    satisfied = posts;
+    container.innerHTML = "";
+    for (const post of posts) {
+      const createdAtDate = new Date(post.createdAt);
+      const now = new Date();
 
-    const diffTime = now - createdAtDate; // milliseconds
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    post.created = diffDays;
-    const card = createCard(post);
-    container.appendChild(card);
+      const diffTime = now - createdAtDate; // milliseconds
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      post.created = diffDays;
+      const card = createCard(post);
+      container.appendChild(card);
+    }
+    document.querySelector("h2.heading").innerText = `Thuê trọ`;
+    document.querySelector(
+      "div.result"
+    ).innerText = `Hiện có ${posts.length} chỗ thuê trọ`;
   }
-  document.querySelector("h2.heading").innerText = `Thuê trọ`;
-  document.querySelector(
-    "div.result"
-  ).innerText = `Hiện có ${posts.length} chỗ thuê trọ`;
+
+  loadAllPosts();
 
   //Add event to filter button
   document
@@ -88,7 +93,8 @@ window.onload = async () => {
     .addEventListener("click", () => filterPrice(posts, 70, 100));
   document
     .querySelector("div.p100")
-    .addEventListener("click", () => filterPrice(posts, 100, 1000));
+    .addEventListener("click", () => filterPrice(posts, 100, 100000));
+  document.querySelector("div.pall").addEventListener("click", loadAllPosts);
 
   document
     .querySelector("div.a30")
@@ -117,6 +123,7 @@ window.onload = async () => {
   document
     .querySelector("div.a500")
     .addEventListener("click", () => filterArea(posts, 500, 500000));
+  document.querySelector("div.aall").addEventListener("click", loadAllPosts);
 };
 async function getPosts() {
   try {
