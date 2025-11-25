@@ -16,16 +16,33 @@ if (username) {
 
 //Change sort option when clicking
 const chosen = document.querySelector(".dropdown .sort-opt");
+let satisfied;
 const options = document.querySelectorAll(".dropdown-sort .dropdown-items");
 for (const item of options) {
   item.addEventListener("click", () => {
     chosen.innerText = item.innerText;
+    if (item.innerText == "Giá từ thấp đến cao") {
+      satisfied.sort((a, b) => a.price - b.price);
+    } else if (item.innerText == "Giá từ cao đến thấp") {
+      satisfied.sort((a, b) => b.price - a.price);
+    } else if (item.innerText == "Diện tích lớn đến nhỏ") {
+      satisfied.sort((a, b) => b.area - a.area);
+    } else if (item.innerText == "Diện tích nhỏ đến lớn") {
+      satisfied.sort((a, b) => a.area - b.area);
+    }
+    const container = document.querySelector(".list");
+    container.innerHTML = "";
+    for (const x of satisfied) {
+      const card = createCard(x);
+      container.appendChild(card);
+    }
   });
 }
 
 //Get all posts
 window.onload = async () => {
   const posts = await getPosts();
+  satisfied = posts;
   const container = document.querySelector(".list");
 
   //Load all posts
@@ -219,7 +236,7 @@ function createCard(info) {
 
 //Filter Price
 function filterPrice(posts, from, to) {
-  let satisfied;
+  // let satisfied;
   if (from == "neg") {
     satisfied = posts.filter((item) => item.isNegotiable == "True");
   } else {
@@ -254,7 +271,7 @@ function filterPrice(posts, from, to) {
 
 //Filter Area
 function filterArea(posts, from, to) {
-  const satisfied = posts.filter(
+  satisfied = posts.filter(
     (item) => parseFloat(item.area) >= from && parseFloat(item.area) <= to
   );
 
